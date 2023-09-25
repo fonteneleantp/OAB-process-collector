@@ -2,10 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys    
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.chrome.options import Options
 from time import sleep
 import openpyxl
 import customtkinter as ctk
-from PIL import Image
 import tkinter as tk
 from PIL import Image, ImageTk
 
@@ -17,9 +17,11 @@ janela = ctk.CTk()
 class Funcs(): 
     def backend(self):
         global numero_oab, estado
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
 
         # Entrar no site da https://pje-consulta-publica.tjmg.jus.br/
-        driver = webdriver.Chrome()
+        driver = webdriver.Chrome(options=chrome_options)
         driver.get('https://pje-consulta-publica.tjmg.jus.br/')
         sleep(3)
         # Digitar número OAB e selecionar estado
